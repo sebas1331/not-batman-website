@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuestas de Contacto - N0T BATMAN</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>N0T BATMAN</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="about.html">Sobre Nosotros</a></li>
+                <li><a href="services.html">Servicios</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Respuestas de Contacto</h2>
+        <?php
+        $responses = [];
+        if (file_exists('responses.json')) {
+            $responses = json_decode(file_get_contents('responses.json'), true);
+        }
+        foreach ($responses as $response) :
+        ?>
+            <div class="response">
+                <p><strong>Nombre:</strong> <?= htmlspecialchars($response['name']) ?></p>
+                <p><strong>Correo Electrónico:</strong> <?= htmlspecialchars($response['email']) ?></p>
+                <p><strong>Mensaje:</strong> <?= nl2br(htmlspecialchars($response['message'])) ?></p>
+                <p><strong>Fecha:</strong> <?= htmlspecialchars($response['date']) ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <footer>
+        <p>&copy; 2024 N0T BATMAN. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
